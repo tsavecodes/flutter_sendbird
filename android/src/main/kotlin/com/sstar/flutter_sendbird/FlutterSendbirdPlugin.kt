@@ -195,6 +195,10 @@ public class FlutterSendbirdPlugin: FlutterPlugin, MethodCallHandler {
           val url = paramList[1]
           SendBirdUtils.getChannel( isOpen,url, result )
         }
+         "getChannelMetaData" -> {
+          val url = call.arguments as String;
+          SendBirdUtils.getChannelMetaData( url, result )
+        }
         "markAsRead"->{
           val url = call.arguments as String;
           SendBirdUtils.markAsRead( url, result )
