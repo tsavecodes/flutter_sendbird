@@ -63,6 +63,18 @@ class FlutterSendbird {
       return GroupChannel.fromJson(_castJsonMap(json));
     }
   }
+  
+  Future<BaseChannel> getChannelMetaData( String url) async {
+    final json = await platform.invokeMethod('getChannelMetaData', [url]);
+
+    if (json == null) return null;
+
+    if (isOpen) {
+      return OpenChannel.fromJson(_castJsonMap(json));
+    } else {
+      return GroupChannel.fromJson(_castJsonMap(json));
+    }
+  }
 
   Future<void> updateCurrentUser(String nickname, String profileImg) async {
     platform.invokeMethod('updateCurrentUser', [nickname, profileImg]);
