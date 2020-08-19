@@ -5,7 +5,7 @@ part 'metadata_res.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true)
 class Metadata {
   Metadata();
-  factory Metadata.fromJson(Map<String, dynamic> map) => _$MemberFromJson(map);
+  factory Metadata.fromJson(Map<String, dynamic> map) => _$MetaDataFromJson(map);
   Map<String, dynamic> toJson() => _$MetaDataToJson(this);
 
   String id;
