@@ -74,6 +74,17 @@ object SendBirdUtils {
         }
         _runChannel( isOpen, url, f )
     }
+    
+    fun getChannelMetadata( url: String, result :MethodChannel.Result ){
+        val f = { group: BaseChannel?, e: SendBirdException? ->
+            val jso = HashMap<String,Any>()
+            if( group != null ) {
+                extractChannel(group, jso)
+                result.success( jso )
+            }
+        }
+        _runChannel( isOpen, url, f )
+    }
 
     fun enterOpenChannel(channelUrl: String, result :MethodChannel.Result ) {
         OpenChannel.getChannel(channelUrl) { openChannel, e ->
@@ -300,6 +311,35 @@ object SendBirdUtils {
         }
 
     }
+    
+    private fun extractChannelMetadata( baseChannel: BaseChannel, json: HashMap<String,Any> ){
+            val keys = HashMap<String,Any>()
+            keys.add("hostId")
+            keys.add("ownerId")  
+            keys.add("type")  
+            keys.add("status")
+            keys.add("sitterFee")
+            keys.add("windowDisplay")
+            keys.add("price")
+            keys.add("paymentDate")
+            keys.add("createDate")
+            
+            val channel = baseChannel as GroupChannel
+            
+            channel.getMetaData(keys, object: BaseChannel.MetaDataHandler() {
+                 override fun onResult(map: HashMap<String,Any>?) {
+                    json[ "hostId"] = map.hostId
+                    json[ "ownerId"] = map.ownerId 
+                    json[ "type"] = map.type
+                    json[ "status"] = map.status
+                    json[ "sitterFee"] = map.sitterFee
+                    json[ "windowDisplay"] = map.hostId
+                    json[ "price"] = map.hostId
+                    json[ "paymentDate"] = map.price
+                    json[ "createDate"] = map.createDate 
+            })
+                
+        }
 
     private fun extractMessage( message: BaseMessage, json: HashMap<String,Any> ) {
         json["created_at"] = message.createdAt
