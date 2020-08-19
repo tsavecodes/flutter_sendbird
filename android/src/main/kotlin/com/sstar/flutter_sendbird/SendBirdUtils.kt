@@ -75,15 +75,15 @@ object SendBirdUtils {
         _runChannel( isOpen, url, f )
     }
     
-    fun getChannelMetadata( url: String, result :MethodChannel.Result ){
-        val f = { group: BaseChannel?, e: SendBirdException? ->
+    fun getChannelMetadata( url: String, result : MethodChannel.Result ){
+        val f = { group : BaseChannel?, e: SendBirdException? ->
             val jso = HashMap<String,Any>()
             if( group != null ) {
-                extractChannel(group, jso)
+                eextractChannelMetadata(group, jso)
                 result.success( jso )
             }
         }
-        _runChannel( isOpen, url, f )
+        _runChannel( url, f )
     }
 
     fun enterOpenChannel(channelUrl: String, result :MethodChannel.Result ) {
