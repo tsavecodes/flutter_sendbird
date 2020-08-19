@@ -139,7 +139,7 @@ class SendBirdUtils: NSObject {
     }
     static func jsArrayToString_( jso :NSArray ) -> NSArray{
         do{
-            let ret = NSMutableArray()
+            let ret = try NSMutableArray()
             for element in jso{
                 ret.add(  element as! NSDictionary )
             }
@@ -347,13 +347,13 @@ class SendBirdUtils: NSObject {
             js["sender_nickname"] = umsg.sender?.nickname
             js["custom_type"] = umsg.customType
             if( umsg.mentionType == SBDMentionType.users ){
-                if( umsg.mentionedUsers != nil ){
+                
                     let users = NSMutableArray()
-                    for user in umsg.mentionedUsers!{
+                    for user in umsg.mentionedUsers {
                         users.add( user.userId )
                     }
                     js["mentioned_user_ids"] = users
-                }
+                
             }
         case let amsg as SBDAdminMessage:
             js["type"] = "ADMIN"
@@ -375,7 +375,7 @@ class SendBirdUtils: NSObject {
     
     
     func listenChannelMessage( handlerId: String, rslt: @escaping FlutterResult ){
-        var event = FlutterEventChannel(name: handlerId, binaryMessenger: _binaryMessenger! )
+        let event = FlutterEventChannel(name: handlerId, binaryMessenger: _binaryMessenger! )
         _eventChannels[handlerId] = event
         rslt(handlerId)
         
