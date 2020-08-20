@@ -78,8 +78,8 @@ object SendBirdUtils {
     fun getChannelMetadata( url: String, result : MethodChannel.Result ){
         val f = { group : BaseChannel?, e: SendBirdException? ->
             val jso = HashMap<String,Any>()
-            if( group != null ) {
-                eextractChannelMetadata(group, jso)
+            if( group != null ) { 
+                extractChannelMetadata(group, jso)
                 result.success( jso )
             }
         }
@@ -290,6 +290,23 @@ object SendBirdUtils {
                     userlist.add( usr )
                 }
                 jso[ "members"]= userlist
+                
+                val metalist = mutableListOf<Any>()
+                for( metadata in channel.metadata ){
+                    var meta = HashMap<String,Any>()
+                    meta[ "id"]= metadata.id
+                    meta[ "hostId"]= metadata.hostId
+                    meta[ "ownerId"]= metadata.ownerId
+                    meta[ "type"]= metadata.type
+                    meta[ "status"]= metadata.status
+                    meta[ "sitterFee"]= metadata.sitterFee
+                    meta[ "windowDisplay"]= metadata.windowDisplay
+                    meta[ "price"]= metadata.price
+                    meta[ "paymentDate"]= metadata.paymentDate
+                    meta[ "createDate"]= metadata.createDate
+                    metalist.add( meta )
+                }
+                jso[ "metadata"]= metalist
 
                 var readlist = HashMap<String, Long >()
                 val reads = channel.getReadStatus( true );
@@ -312,34 +329,6 @@ object SendBirdUtils {
 
     }
     
-    private fun extractChannelMetadata( baseChannel: BaseChannel, json: HashMap<String,Any> ){
-            val keys = HashMap<String,Any>()
-            keys.add("hostId")
-            keys.add("ownerId")  
-            keys.add("type")  
-            keys.add("status")
-            keys.add("sitterFee")
-            keys.add("windowDisplay")
-            keys.add("price")
-            keys.add("paymentDate")
-            keys.add("createDate")
-            
-            val channel = baseChannel as GroupChannel
-            
-            channel.getMetaData(keys, object: BaseChannel.MetaDataHandler() {
-                 override fun onResult(map: HashMap<String,Any>?) {
-                    json[ "hostId"] = map.hostId
-                    json[ "ownerId"] = map.ownerId 
-                    json[ "type"] = map.type
-                    json[ "status"] = map.status
-                    json[ "sitterFee"] = map.sitterFee
-                    json[ "windowDisplay"] = map.hostId
-                    json[ "price"] = map.hostId
-                    json[ "paymentDate"] = map.price
-                    json[ "createDate"] = map.createDate 
-            })
-                
-        }
 
     private fun extractMessage( message: BaseMessage, json: HashMap<String,Any> ) {
         json["created_at"] = message.createdAt
