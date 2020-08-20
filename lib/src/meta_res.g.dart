@@ -1,3 +1,11 @@
+  
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'meta_res.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
 
 MetaData _$MetaDataFromJson(Map json) {
   return MetaData()
