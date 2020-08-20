@@ -124,7 +124,7 @@ ChannelMetaData _$ChannelMetaDataFromJson(Map json) {
     ..createDate = json['createDate'] as String;
 }
 
-Map<String, dynamic> _$ChannelMetaDataToJson(Metadata instance) {
+Map<String, dynamic> _$ChannelMetaDataToJson(ChannelMetaData instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
