@@ -7,8 +7,8 @@ part of 'meta_res.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MetaData _$MetaDataFromJson(Map json) {
-  return MetaData()
+Metadata _$MetadataFromJson(Map json) {
+  return Metadata()
     ..id = json['id'] as String
     ..hostId = json['hostId'] as String
     ..ownerId = json['ownerId'] as String
@@ -21,7 +21,7 @@ MetaData _$MetaDataFromJson(Map json) {
     ..createDate = json['createDate'] as String;
 }
 
-Map<String, dynamic> _$MetaDataToJson(ChannelMetaData instance) {
+Map<String, dynamic> _$MetadataToJson(Metadata instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
