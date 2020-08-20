@@ -49,6 +49,13 @@ GroupChannel _$GroupChannelFromJson(Map json) {
                 (k, e) => MapEntry(k as String, e),
               )))
         ?.toList()
+    ..metadata = (json['metadata'] as List)
+        ?.map((e) => e == null
+            ? null
+            : Metadata.fromJson((e as Map)?.map(
+                (k, e) => MapEntry(k as String, e),
+              )))
+        ?.toList()
     ..readStatus = (json['read_status'] as Map)?.map(
       (k, e) => MapEntry(k as String, e as int),
     )
@@ -77,6 +84,7 @@ Map<String, dynamic> _$GroupChannelToJson(GroupChannel instance) {
   writeNotNull('is_public', instance.isPublic);
   writeNotNull('unread_message_count', instance.unreadMessageCount);
   writeNotNull('members', instance.members);
+  writeNotNull('metadata', instance.metadata);
   writeNotNull('read_status', instance.readStatus);
   writeNotNull('last_message', instance.lastMessage);
   return val;
@@ -124,25 +132,4 @@ ChannelMetaData _$ChannelMetaDataFromJson(Map json) {
     ..createDate = json['createDate'] as String;
 }
 
-Map<String, dynamic> _$ChannelMetaDataToJson(ChannelMetaData instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', instance.id);
-  writeNotNull('hostId', instance.hostId);
-  writeNotNull('ownerId', instance.ownerId);
-  writeNotNull('type', instance.type);
-  writeNotNull('status', instance.status);
-  writeNotNull('sitterFee', instance.sitterFee);
-  writeNotNull('windowDisplay', instance.windowDisplay);
-  writeNotNull('price', instance.price);
-  writeNotNull('paymentDate', instance.paymentDate);
-  writeNotNull('createDate', instance.createDate);
-  return val;
-}
 
