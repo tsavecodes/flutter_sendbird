@@ -1,4 +1,4 @@
-package com.sstar.flutter_sendbird
+package com.lathamios.flutter_sendbird;
 
 /*
 import com.sensestar.mermaids.BuildConfig
@@ -75,17 +75,7 @@ object SendBirdUtils {
         _runChannel( isOpen, url, f )
     }
     
-    fun getChannelMetadata( url: String, result : MethodChannel.Result ){
-        val f = { group : BaseChannel?, e: SendBirdException? ->
-            val jso = HashMap<String,Any>()
-            if( group != null ) { 
-                extractChannelMetadata(group, jso)
-                result.success( jso )
-            }
-        }
-        _runChannel( url, f )
-    }
-
+  
     fun enterOpenChannel(channelUrl: String, result :MethodChannel.Result ) {
         OpenChannel.getChannel(channelUrl) { openChannel, e ->
             Log.d(SendBirdUtils::class.java.simpleName, "enterOpenChannel error e : $e")
@@ -292,7 +282,7 @@ object SendBirdUtils {
                 jso[ "members"]= userlist
                 
                 val metalist = mutableListOf<Any>()
-                for( metadata in channel.metadata ){
+                for( metadata in channel.metaData ){
                     var meta = HashMap<String,Any>()
                     meta[ "id"]= metadata.id
                     meta[ "hostId"]= metadata.hostId
