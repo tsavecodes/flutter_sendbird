@@ -1,4 +1,4 @@
-package com.lathamios.flutter_sendbird;
+package com.sstar.flutter_sendbird
 
 /*
 import com.sensestar.mermaids.BuildConfig
@@ -74,8 +74,7 @@ object SendBirdUtils {
         }
         _runChannel( isOpen, url, f )
     }
-    
-  
+
     fun enterOpenChannel(channelUrl: String, result :MethodChannel.Result ) {
         OpenChannel.getChannel(channelUrl) { openChannel, e ->
             Log.d(SendBirdUtils::class.java.simpleName, "enterOpenChannel error e : $e")
@@ -280,23 +279,6 @@ object SendBirdUtils {
                     userlist.add( usr )
                 }
                 jso[ "members"]= userlist
-                
-                val metalist = mutableListOf<Any>()
-                for( metadata in channel.metaData ){
-                    var meta = HashMap<String,Any>()
-                    meta[ "id"]= metadata.id
-                    meta[ "hostId"]= metadata.hostId
-                    meta[ "ownerId"]= metadata.ownerId
-                    meta[ "type"]= metadata.type
-                    meta[ "status"]= metadata.status
-                    meta[ "sitterFee"]= metadata.sitterFee
-                    meta[ "windowDisplay"]= metadata.windowDisplay
-                    meta[ "price"]= metadata.price
-                    meta[ "paymentDate"]= metadata.paymentDate
-                    meta[ "createDate"]= metadata.createDate
-                    metalist.add( meta )
-                }
-                jso[ "metadata"]= metalist
 
                 var readlist = HashMap<String, Long >()
                 val reads = channel.getReadStatus( true );
@@ -318,7 +300,6 @@ object SendBirdUtils {
         }
 
     }
-    
 
     private fun extractMessage( message: BaseMessage, json: HashMap<String,Any> ) {
         json["created_at"] = message.createdAt
