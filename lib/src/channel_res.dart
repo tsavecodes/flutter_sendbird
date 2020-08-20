@@ -63,7 +63,7 @@ class ChannelMetaData extends BaseChannel {
   String paymentDate;
   String createDate;
 
-  ChannelMetaDataChannel();
+  ChannelMetaData();
   factory ChannelMetaData.fromJson(Map<String, dynamic> json) => _$ChannelMetaDataFromJson(json);
 }
 
