@@ -118,18 +118,5 @@ Map<String, dynamic> _$OpenChannelToJson(OpenChannel instance) {
   return val;
 }
 
-ChannelMetaData _$ChannelMetaDataFromJson(Map json) {
-  return ChannelMetaData()
-    ..id = json['id'] as String
-    ..hostId = json['hostId'] as String
-    ..ownerId = json['ownerId'] as String
-    ..type = json['type'] as String
-    ..status = json['status'] as String
-    ..sitterFee = json['sitterFee'] as String
-    ..windowDisplay = json['windowDisplay'] as String
-    ..price = json['price'] as String
-    ..paymentDate = json['paymentDate'] as String
-    ..createDate = json['createDate'] as String;
-}
 
 
