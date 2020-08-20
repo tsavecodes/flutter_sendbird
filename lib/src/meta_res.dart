@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'metadata_res.g.dart';
+part 'meta_res.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true)
 class Metadata {
