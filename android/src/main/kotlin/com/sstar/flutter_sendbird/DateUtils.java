@@ -1,4 +1,4 @@
-package com.lathamios.flutter_sendbird;
+package com.sstar.flutter_sendbird;
 
 import android.annotation.SuppressLint;
 
