@@ -63,7 +63,6 @@ class FlutterSendbird {
       return GroupChannel.fromJson(_castJsonMap(json));
     }
   }
-  
 
   Future<void> updateCurrentUser(String nickname, String profileImg) async {
     platform.invokeMethod('updateCurrentUser', [nickname, profileImg]);
