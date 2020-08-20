@@ -110,8 +110,8 @@ Map<String, dynamic> _$OpenChannelToJson(OpenChannel instance) {
   return val;
 }
 
-ChannelMetadata _$ChannelMetadataFromJson(Map json) {
-  return ChannelMetadata()
+ChannelMetaData _$ChannelMetaDataFromJson(Map json) {
+  return ChannelMetaData()
     ..id = json['id'] as String
     ..hostId = json['hostId'] as String
     ..ownerId = json['ownerId'] as String
@@ -124,7 +124,7 @@ ChannelMetadata _$ChannelMetadataFromJson(Map json) {
     ..createDate = json['createDate'] as String
 }
 
-Map<String, dynamic> _$ChannelMetadataaToJson(Metadata instance) {
+Map<String, dynamic> _$ChannelMetaDataToJson(Metadata instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
