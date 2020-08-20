@@ -121,7 +121,7 @@ ChannelMetaData _$ChannelMetaDataFromJson(Map json) {
     ..windowDisplay = json['windowDisplay'] as String
     ..price = json['price'] as String
     ..paymentDate = json['paymentDate'] as String
-    ..createDate = json['createDate'] as String
+    ..createDate = json['createDate'] as String;
 }
 
 Map<String, dynamic> _$ChannelMetaDataToJson(Metadata instance) {
