@@ -29,9 +29,7 @@ Map<String, dynamic> _$MetadataToJson(Metadata instance) {
     }
   }
 
-  writeNotNull('user_id', instance.userId);
-  writeNotNull('nickname', instance.nickname);
-  writeNotNull('profile_url', instance.profileUrl);
+
   writeNotNull('id', instance.id);
   writeNotNull('hostId', instance.hostId);
   writeNotNull('ownerId', instance.ownerId);
