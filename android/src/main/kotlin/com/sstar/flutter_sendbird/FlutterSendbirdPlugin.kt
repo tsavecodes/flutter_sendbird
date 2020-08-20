@@ -1,4 +1,4 @@
-package com.lathamios.flutter_sendbird;
+package com.sstar.flutter_sendbird
 
 import androidx.annotation.NonNull;
 
@@ -195,7 +195,6 @@ public class FlutterSendbirdPlugin: FlutterPlugin, MethodCallHandler {
           val url = paramList[1]
           SendBirdUtils.getChannel( isOpen,url, result )
         }
-
         "markAsRead"->{
           val url = call.arguments as String;
           SendBirdUtils.markAsRead( url, result )
