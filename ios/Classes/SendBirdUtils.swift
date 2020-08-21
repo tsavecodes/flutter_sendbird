@@ -297,7 +297,7 @@ class SendBirdUtils: NSObject {
         case let opench as SBDOpenChannel:
             js["custom_type"] = opench.customType
         case let groupch as SBDGroupChannel:
-            channel.getWithUrl(channel.channelUrl, completionHandler: { (channel, error) in
+            SBDGroupChannel.getWithUrl(channel.channelUrl, completionHandler: { (channel, error) in
                     let keys : NSArray = ["id", "hostId", "ownerId", "type", "status", "windowDisplay", "price", "paymentDate", "createDate"]
 
                     channel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
