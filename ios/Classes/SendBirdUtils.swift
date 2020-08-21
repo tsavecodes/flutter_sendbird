@@ -300,7 +300,7 @@ class SendBirdUtils: NSObject {
             SBDGroupChannel.getWithUrl(channel.channelUrl, completionHandler: { (channel, error) in
                     let keys : NSArray = ["id", "hostId", "ownerId", "type", "status", "windowDisplay", "price", "paymentDate", "createDate"]
 
-                    channel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+                    channel?.getMetaData(completionHandler: { (metaData, error) in
                         guard error == nil else {   // Error.
                         return
                      }
@@ -310,7 +310,7 @@ class SendBirdUtils: NSObject {
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
-            js["status"] = groupch.metaData
+            js["status"] = channel.metaData
             var msg = NSMutableDictionary()
             if( groupch.lastMessage != nil ) {
                 extractMessage( msg: groupch.lastMessage!, js: &msg )
