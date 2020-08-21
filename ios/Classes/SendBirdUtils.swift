@@ -297,7 +297,7 @@ class SendBirdUtils: NSObject {
         case let groupch as SBDGroupChannel:
                 var channelMetadata = [String: String]()
                 channel.getAllMetaData(completionHandler: { (metaData, error) in
-                   guard let metadata = metaData, error == nil else {
+                   guard let extraData = metaData, error == nil else {
                     if let error = error {
                         print("error retrieving metadata: \(error)")
                     
@@ -307,14 +307,14 @@ class SendBirdUtils: NSObject {
                      }
                    }
 
-                channelMetadata = metadata
+                channelMetadata = extraData
                })
              
           
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
-            js["status"] = channelMetadata["status"]
+            js["status"] = channelMetadata["searchCity"]
             var msg = NSMutableDictionary()
             if( groupch.lastMessage != nil ) {
                 extractMessage( msg: groupch.lastMessage!, js: &msg )
