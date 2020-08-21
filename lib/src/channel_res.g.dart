@@ -40,6 +40,7 @@ GroupChannel _$GroupChannelFromJson(Map json) {
     ..data = json['data'] as String
     ..isOpenChannel = json['is_open_channel'] as bool
     ..customType = json['custom_type'] as String
+    ..status = json['status'] as String
     ..isPublic = json['is_public'] as bool
     ..unreadMessageCount = json['unread_message_count'] as int
     ..members = (json['members'] as List)
@@ -81,6 +82,7 @@ Map<String, dynamic> _$GroupChannelToJson(GroupChannel instance) {
   writeNotNull('data', instance.data);
   writeNotNull('is_open_channel', instance.isOpenChannel);
   writeNotNull('custom_type', instance.customType);
+  writeNotNull('status', instance.status);
   writeNotNull('is_public', instance.isPublic);
   writeNotNull('unread_message_count', instance.unreadMessageCount);
   writeNotNull('members', instance.members);
