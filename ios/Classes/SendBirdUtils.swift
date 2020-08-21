@@ -300,7 +300,7 @@ class SendBirdUtils: NSObject {
             SBDGroupChannel.getWithUrl(channel.channelUrl, completionHandler: { (channel, error) in
                     let keys : NSArray = ["id", "hostId", "ownerId", "type", "status", "windowDisplay", "price", "paymentDate", "createDate"]
 
-                    channel?.getMetaData(completionHandler: { (metaData, error) in
+                    channel?.getAllMetaData(completionHandler: { (metaData, error) in
                         guard error == nil else {   // Error.
                         return
                      }
