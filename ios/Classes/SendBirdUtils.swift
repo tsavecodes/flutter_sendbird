@@ -138,16 +138,13 @@ class SendBirdUtils: NSObject {
         }
     }
     static func jsArrayToString_( jso :NSArray ) -> NSArray{
-        do{
+       
             let ret = NSMutableArray()
             for element in jso{
                 ret.add(  element as! NSDictionary )
             }
             return ret
-        } catch {
-            NSLog("JSON encode fail")
-            return NSArray()
-        }
+     
     }
 
     func setDoNotDisturb( enabled: Bool, timeFrom: String, timeEnd: String, rslt: @escaping FlutterResult){
@@ -303,7 +300,7 @@ class SendBirdUtils: NSObject {
                    guard let metadata = metaData, error == nil else {
                     if let error = error {
                         print("error retrieving metadata: \(error)")
-                        group.leave()
+                    
                         return
                     } else {
                         fatalError("error can't be nil")
@@ -317,7 +314,7 @@ class SendBirdUtils: NSObject {
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
-            js["status"] = channelMetadata
+            js["status"] = channelMetadata.status
             var msg = NSMutableDictionary()
             if( groupch.lastMessage != nil ) {
                 extractMessage( msg: groupch.lastMessage!, js: &msg )
