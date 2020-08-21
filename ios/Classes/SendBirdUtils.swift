@@ -290,12 +290,7 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
-        
-        switch channel{
-        case let opench as SBDOpenChannel:
-            js["custom_type"] = opench.customType
-        case let groupch as SBDGroupChannel:
-                var channelMetadata = [String: String]()
+        let channelMetadata = [String: String]()
                 channel.getAllMetaData { (metaData, error) in
                    guard let extraData = metaData, error == nil else {
                     if let error = error {
@@ -309,12 +304,15 @@ class SendBirdUtils: NSObject {
 
                 channelMetadata = extraData
                }
-             
-          
+        js["status"] = channelMetadata["searchCity"]
+        switch channel{
+        case let opench as SBDOpenChannel:
+            js["custom_type"] = opench.customType
+        case let groupch as SBDGroupChannel
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
-            js["status"] = channelMetadata["searchCity"]
+            
             var msg = NSMutableDictionary()
             if( groupch.lastMessage != nil ) {
                 extractMessage( msg: groupch.lastMessage!, js: &msg )
