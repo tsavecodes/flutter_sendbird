@@ -295,7 +295,7 @@ class SendBirdUtils: NSObject {
         case let opench as SBDOpenChannel:
             js["custom_type"] = opench.customType
         case let groupch as SBDGroupChannel:
-                var channelMetadata: [String: NSObject]?
+                var channelMetadata = [String: NSObject]()
                 channel.getAllMetaData(completionHandler: { (metaData, error) in
                    guard let metadata = metaData, error == nil else {
                     if let error = error {
