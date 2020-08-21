@@ -139,12 +139,12 @@ class SendBirdUtils: NSObject {
     }
     static func jsArrayToString_( jso :NSArray ) -> NSArray{
         do{
-            let ret = try NSMutableArray()
+            let ret = NSMutableArray()
             for element in jso{
                 ret.add(  element as! NSDictionary )
             }
             return ret
-        }catch{
+        } catch {
             NSLog("JSON encode fail")
             return NSArray()
         }
@@ -293,24 +293,30 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
+        var channelMetadata: [String: NSObject]?
         switch channel{
         case let opench as SBDOpenChannel:
             js["custom_type"] = opench.customType
         case let groupch as SBDGroupChannel:
-            SBDGroupChannel.getWithUrl(channel.channelUrl, completionHandler: { (channel, error) in
-                    let keys : NSArray = ["id", "hostId", "ownerId", "type", "status", "windowDisplay", "price", "paymentDate", "createDate"]
-
-                    channel?.getAllMetaData(completionHandler: { (metaData, error) in
-                        guard error == nil else {   // Error.
+                channel?.getAllMetaData(completionHandler: { (metaData, error) in
+                   guard let metadata = metaData, error == nil else {
+                    if let error = error {
+                        print("error retrieving metadata: \(error)")
+                        group.leave()
                         return
+                    } else {
+                        fatalError("error can't be nil")
+                    }
                      }
-                    })
-                })
+
+                channelMetadata = metadata
+               })
+             
           
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
-            js["status"] = channel.metaData
+            js["status"] = channel.channelMetadata
             var msg = NSMutableDictionary()
             if( groupch.lastMessage != nil ) {
                 extractMessage( msg: groupch.lastMessage!, js: &msg )
