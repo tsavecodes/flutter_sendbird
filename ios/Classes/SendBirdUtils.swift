@@ -297,7 +297,7 @@ class SendBirdUtils: NSObject {
                         }
                      channelMetadata = metaData                                                
                     })
-                 })
+         
         
         switch channel{
         case let opench as SBDOpenChannel:
