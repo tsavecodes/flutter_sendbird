@@ -291,10 +291,7 @@ class SendBirdUtils: NSObject {
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
         var channelMetadata = [String: String]()
-        channel.getChannelWithUrl(channel.channelUrl, completionHandler: { (metachannel, error) in
-            let keys : NSArray = ["status", "searchCity"]
-
-            metachannel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+        channel?.getAllMetaDataWithCompletionHandler( completionHandler: { (metaData, error) in
                 guard error == nil else {   // Error.
                             return
                         }
