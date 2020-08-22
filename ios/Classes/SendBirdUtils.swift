@@ -300,7 +300,7 @@ class SendBirdUtils: NSObject {
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
-            groupch.getWithUrl(channel.channelUrl, completionHandler: { (metachannel, error) in
+            groupch.getChannelWithUrl(channel.channelUrl, completionHandler: { (metachannel, error) in
             let keys : NSArray = ["status", "searchCity"]
 
             metachannel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
