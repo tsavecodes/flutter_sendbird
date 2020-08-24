@@ -296,7 +296,7 @@ class SendBirdUtils: NSObject {
                 guard error == nil else {   // Error.
                  return
                 }
-               var channelMetadata = NSMutableDictionary()
+               var channelMetadata = [String: Any]()
                channelMetadata = metaData
                 jsarr.add(channelMetadata)
                //channelMetadata["owner_id"] = metaData.ownerId
