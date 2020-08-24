@@ -290,16 +290,25 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
+        var channelMetadata: [String: NSObject]?
        // var channelMetadata = [String: Any]()
-        var channelMetadata = [String: Any]()
-        channel.getAllMetaData{ (metadata, error) in
-             guard let error == nil else {   // Error.
-                        return
-                     } 
-                            
-         }
-        channelMetadata["status"] = metadata["status"]
-        channelMetadata["type"] = metadata["type"]  
+        let group = DispatchGroup()
+        group.enter()
+        channel.getAllMetaData { (metadata, error) in
+            guard let metadata = metadata, error == nil else {
+              if let error = error {
+                  print("error retrieving metadata: \(error)")
+                  group.leave()
+                  return
+              } else {
+                  fatalError("error can't be nil")
+              }
+          }
+
+          channelMetadata = metadata
+          group.leave()
+        }
+        
         js["status"] = channelMetadata["status"]
         
         switch channel{
