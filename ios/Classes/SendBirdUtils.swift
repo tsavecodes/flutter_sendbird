@@ -290,15 +290,15 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
-        var channelMetadata = [String: String]()
+        var channelMetadata = [String: All]()
         channel.getAllMetaData{ (metaData, error) in
              guard let metadata = metaData, error == nil else {   // Error.
                         return
                      } 
-            channelMetaData = metadata
+            channelMetadata = metadata
          }
         
-          js["status"] = channelMetaData["status"]
+          js["status"] = channelMetadata["status"]
         
         switch channel{
         case let opench as SBDOpenChannel:
