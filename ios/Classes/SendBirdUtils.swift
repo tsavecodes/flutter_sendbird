@@ -293,23 +293,15 @@ class SendBirdUtils: NSObject {
         var channelMetadata = [String: Any]()
        // var channelMetadata = [String: Any]()
         let group = DispatchGroup()
-        group.enter()
         channel.getAllMetaData { (metadata, error) in
-            guard let metadata = metadata, error == nil else {
-              if let error = error {
-                  print("error retrieving metadata: \(error)")
-                  group.leave()
-                  return
-              } else {
-                  fatalError("error can't be nil")
-              }
-          }
-
+            guard error == nil else {   // Error.
+            return
+            }
           channelMetadata = metadata
-          group.leave()
+          js["status"] = channelMetadata["status"]
         }
         
-        js["status"] = channelMetadata["status"]
+        
         
         switch channel{
         case let opench as SBDOpenChannel:
