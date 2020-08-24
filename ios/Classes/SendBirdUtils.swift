@@ -310,11 +310,7 @@ class SendBirdUtils: NSObject {
                         jsarr.add(channelMetadata)
                          })
                      })
-                
-               
-                
-               //channelMetadata["owner_id"] = metaData.ownerId
-                }
+            
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
