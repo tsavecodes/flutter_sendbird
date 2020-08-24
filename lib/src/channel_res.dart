@@ -1,6 +1,8 @@
 import 'package:flutter_sendbird/flutter_sendbird.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'utils/logger.dart';
+
 import 'member_res.dart';
 import 'meta_res.dart';
 import 'message_res.dart';
@@ -15,7 +17,7 @@ class BaseChannel {
   bool isOpenChannel; // 世界頻道
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true)
+@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true, explicitToJson: true)
 class GroupChannel extends BaseChannel {
   String customType;
   bool isPublic; // 需要密碼加入
@@ -40,8 +42,22 @@ class GroupChannel extends BaseChannel {
     }
   }
 
-  GroupChannel();
-  factory GroupChannel.fromJson(Map<String, dynamic> json) => _$GroupChannelFromJson(json);
+  //GroupChannel();
+  factory GroupChannel.fromJson(Map<String, dynamic> json) {
+    if (json.isEmpty) {
+      return GroupChannel();
+    }
+
+    logger.v('sb channel data: $json');
+
+    final dataJson = json['url'] as String;
+
+    final int u = json['unread_message_count'] as String;
+
+    }
+  }
+  
+ // factory GroupChannel.fromJson(Map<String, dynamic> json) => _$GroupChannelFromJson(json);
   Map<String, dynamic> toJson() => _$GroupChannelToJson(this);
 }
 
