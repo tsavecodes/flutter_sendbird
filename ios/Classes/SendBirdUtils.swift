@@ -290,7 +290,7 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
-        var channelMetadata = [String: All]()
+        var channelMetadata = [String: Any]()
         channel.getAllMetaData{ (metaData, error) in
              guard let metadata = metaData, error == nil else {   // Error.
                         return
