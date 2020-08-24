@@ -25,7 +25,6 @@ class GroupChannel extends BaseChannel {
   Message _lastMessage;
   int unreadMessageCount;
   List<Member> members;
-  List<Metadata> metadata;
   String status;
   Map<String, int> readStatus;
 
