@@ -17,7 +17,7 @@ class BaseChannel {
   bool isOpenChannel; // 世界頻道
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: true, anyMap: true, explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true, explicitToJson: true)
 class GroupChannel extends BaseChannel {
   GroupChannel({this.customType, this.isPublic, this.unreadMessageCount, this.status});
   String customType;
@@ -42,18 +42,9 @@ class GroupChannel extends BaseChannel {
     }
   }
 
-  //GroupChannel();
-  factory GroupChannel.fromJson(Map<String, dynamic> json) {
-    if (json.isEmpty) {
-      return GroupChannel();
-    }
-
-    logger.v('sb channel data: $json');
-  
-  }
-  
- // factory GroupChannel.fromJson(Map<String, dynamic> json) => _$GroupChannelFromJson(json);
-  Map<String, dynamic> toJson() => _$GroupChannelToJson(this);
+ GroupChannel();
+ factory GroupChannel.fromJson(Map<String, dynamic> json) => _$GroupChannelFromJson(json);
+ Map<String, dynamic> toJson() => _$GroupChannelToJson(this);
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true)
