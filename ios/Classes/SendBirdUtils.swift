@@ -295,7 +295,7 @@ class SendBirdUtils: NSObject {
              guard let metadata = metaData, error == nil else {   // Error.
                         return
                      } 
-            channelMetadata = metadata
+            channelMetadata["status"] = metadata["status"]
          }
         
           js["status"] = channelMetadata["status"]
