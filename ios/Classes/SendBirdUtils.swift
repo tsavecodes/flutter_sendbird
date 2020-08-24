@@ -298,7 +298,7 @@ class SendBirdUtils: NSObject {
         case let opench as SBDOpenChannel:
             js["custom_type"] = opench.customType
         case let groupch as SBDGroupChannel:
-            groupch.getChannelWithUrl(channel.channelUrl, completionHandler: { (metaChannel, error) in
+            groupch.getChannel(channel.channelUrl, completionHandler: { (metaChannel, error) in
                 let keys : NSArray = ["status", "type"]
                     metaChannel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
                          guard error == nil else {   // Error.
