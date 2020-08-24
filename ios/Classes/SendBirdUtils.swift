@@ -292,21 +292,29 @@ class SendBirdUtils: NSObject {
         js["is_open_channel"] = channel.isOpen()
         let jsarr = NSMutableArray()
         
-        channel.getAllMetaData { metaData, error in
-                guard error == nil else {   // Error.
-                 return
-                }
-               var channelMetadata = [String: Any]()
-               channelMetadata = metaData
-                jsarr.add(channelMetadata)
-               //channelMetadata["owner_id"] = metaData.ownerId
-        }
          
         
         switch channel{
         case let opench as SBDOpenChannel:
             js["custom_type"] = opench.customType
         case let groupch as SBDGroupChannel:
+            groupch.getChannelWithUrl(channel.channelUrl, completionHandler: { (metaChannel, error) in
+                let keys : NSArray = ["status", "type"]
+                    metaChannel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+                         guard error == nil else {   // Error.
+                            return
+                             } 
+                        var channelMetadata = [String: Any]()
+                        channelMetadata["status"] = metaData["status"]
+                        channelMetadata["stype"] = metaData["type"] 
+                        jsarr.add(channelMetadata)
+                         })
+                     })
+                
+               
+                
+               //channelMetadata["owner_id"] = metaData.ownerId
+                }
             js["is_public"] = groupch.isPublic
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
