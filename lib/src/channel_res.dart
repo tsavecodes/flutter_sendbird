@@ -17,7 +17,7 @@ class BaseChannel {
   bool isOpenChannel; // 世界頻道
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true, explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: true, anyMap: true, explicitToJson: true)
 class GroupChannel extends BaseChannel {
   GroupChannel({this.customType, this.isPublic, this.unreadMessageCount, this.status});
   String customType;
@@ -50,12 +50,7 @@ class GroupChannel extends BaseChannel {
     }
 
     logger.v('sb channel data: $json');
-
-    final dataJson = json['url'] as String;
-
-    final int u = json['unread_message_count'] as int;
-
-   
+  
   }
   
  // factory GroupChannel.fromJson(Map<String, dynamic> json) => _$GroupChannelFromJson(json);
