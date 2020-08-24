@@ -295,7 +295,7 @@ class SendBirdUtils: NSObject {
                 guard error == nil else {   // Error.
                  return
                 }
-               channelMetadata["owner"] = metaData.owner
+               channelMetadata["status"] = metaData["status"]
                //channelMetadata["owner_id"] = metaData.ownerId
         }
          
