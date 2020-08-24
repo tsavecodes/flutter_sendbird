@@ -297,9 +297,9 @@ class SendBirdUtils: NSObject {
                 return
             }
           channelMetadata = metadata
-          js["status"] = channelMetadata["status"]
         }
-        
+         js["status"] = channelMetadata["status"]
+
         
         
         switch channel{
