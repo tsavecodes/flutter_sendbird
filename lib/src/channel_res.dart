@@ -53,7 +53,7 @@ class GroupChannel extends BaseChannel {
 
     final dataJson = json['url'] as String;
 
-    final int u = json['unread_message_count'] as String;
+    final int u = json['unread_message_count'] as int;
 
    
   }
