@@ -290,7 +290,7 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
-        var channelMetadata: [String: Any]()
+        var channelMetadata = [String: Any]()
        // var channelMetadata = [String: Any]()
         let group = DispatchGroup()
         group.enter()
