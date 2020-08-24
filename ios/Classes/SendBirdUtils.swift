@@ -290,12 +290,15 @@ class SendBirdUtils: NSObject {
         js["url"] = channel.channelUrl
         js["data"] = channel.data
         js["is_open_channel"] = channel.isOpen()
-        var channelMetadata = NSMutableDictionary()
+        let jsarr = NSMutableArray()
+        
         channel.getAllMetaData { metaData, error in
                 guard error == nil else {   // Error.
                  return
                 }
-               channelMetadata["status"] = metaData["status"]
+               var channelMetadata = NSMutableDictionary()
+               channelMetadata = metaData
+                jsarr.add(channelMetadata)
                //channelMetadata["owner_id"] = metaData.ownerId
         }
          
@@ -308,7 +311,7 @@ class SendBirdUtils: NSObject {
             js["custom_type"] = groupch.customType
             js["unread_message_count"] = groupch.unreadMessageCount
             
-            js["status"] = channelMetadata["status"]
+            js["status"] = jsarr["status"]
 
             var msg = NSMutableDictionary()
             if( groupch.lastMessage != nil ) {
