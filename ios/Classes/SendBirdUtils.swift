@@ -292,11 +292,11 @@ class SendBirdUtils: NSObject {
         js["is_open_channel"] = channel.isOpen()
         var channelMetadata = NSMutableDictionary()
         channel.getAllMetaData { metaData, error in
-                if( err != nil || metaData == nil){
-                    return
-                    }
-                 channelMetadata["status"] = metaData.status 
-                 channelMetadata["owner_id"] = metaData.ownerId
+                guard error == nil else {   // Error.
+                 return
+                }
+               channelMetadata["owner"] = metaData.owner
+               //channelMetadata["owner_id"] = metaData.ownerId
         }
          
         
