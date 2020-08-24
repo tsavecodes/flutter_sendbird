@@ -19,6 +19,7 @@ class BaseChannel {
 
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true, explicitToJson: true)
 class GroupChannel extends BaseChannel {
+  GroupChannel({this.customType, this.isPublic, this.unreadMessageCount, this.status});
   String customType;
   bool isPublic; // 需要密碼加入
   Message _lastMessage;
@@ -54,7 +55,7 @@ class GroupChannel extends BaseChannel {
 
     final int u = json['unread_message_count'] as String;
 
-    }
+   
   }
   
  // factory GroupChannel.fromJson(Map<String, dynamic> json) => _$GroupChannelFromJson(json);
