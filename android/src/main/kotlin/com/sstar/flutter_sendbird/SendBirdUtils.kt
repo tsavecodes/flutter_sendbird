@@ -256,6 +256,18 @@ object SendBirdUtils {
         jso["url"]= baseChannel.url
         jso["data"]= baseChannel.data
         jso["is_open_channel"]= baseChannel.isOpenChannel
+        var meta = HashMap<String,Any>()
+        
+        channel.getAllMetaData(object: BaseChannel.MetaDataHandler() {
+        override fun onResult(Map<String, String> map, SendBirdException e) {
+                    if (e != null) {    // Error.
+                        return;
+                    }
+                meta["status"] = map["status]
+                    
+                }
+            });
+        jso["status"] = meta["status"]
 
         when( baseChannel )
         {
