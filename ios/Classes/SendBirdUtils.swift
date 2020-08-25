@@ -310,7 +310,7 @@ class SendBirdUtils: NSObject {
         }
 
         group.notify(queue: .main) {
-            let metadata = channelMetadata else {
+            guard let metadata = channelMetadata else {
                 print("error retrieving metadata")
                 return
             }
