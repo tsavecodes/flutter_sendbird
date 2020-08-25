@@ -264,11 +264,10 @@ object SendBirdUtils {
                     if (e != null) {    // Error.
                         return;
                     }
-                meta["status"] = map["status"]
+                jso["status"] = map["status"]
                     
                 }
             })
-        jso["status"] = meta["status"]
 
         when( baseChannel )
         {
