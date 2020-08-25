@@ -263,7 +263,7 @@ object SendBirdUtils {
                     if (e != null) {    // Error.
                         return;
                     }
-                meta["status"] = map["status]
+                meta["status"] = map["status"]
                     
                 }
             })
