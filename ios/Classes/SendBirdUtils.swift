@@ -306,14 +306,12 @@ class SendBirdUtils: NSObject {
             }
 
             channelMetadata = metadata
-                                print("got metadata: \(metadata)")
+            print("got metadata: \(metadata)")
             group.leave()
         }
 
         group.notify(queue: .main) {
-         
-
-            print("got metadata: \(metadata)")
+            print("got metadata: \(channelMetadata)")
         }
 
          js["status"] = channelMetadata["status"]
