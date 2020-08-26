@@ -268,7 +268,7 @@ object SendBirdUtils {
                     
                 }
             })
-            jso["metadata"] = meta
+            //jso["metadata"] = meta
         when( baseChannel )
         {
             is GroupChannel ->{
