@@ -256,19 +256,18 @@ object SendBirdUtils {
         jso["url"]= baseChannel.url
         jso["data"]= baseChannel.data
         jso["is_open_channel"]= baseChannel.isOpenChannel
-        var metaData:  MutableMap<String, Any> = mutableMapOf<String, Any>() 
+        var metaData = mutableMapOf<String, Any>()
         
-        baseChannel.getAllMetaData( object:BaseChannel.MetaDataHandler() {
-                override
-                fun onResult(map: Map<String, String>, e:SendBirdException) {
-                    if (e != null)
-                    { // Error.
-                      return
-                    }
-                 metaData.putAll(map)   
-              }
+        baseChannel.getAllMetaData(object: BaseChannel.MetaDataHandler() {
+            override
+            fun onResult(map: Map<String, String>, e: SendBirdException) {
+                        if (e != null) {    // Error.
+                            return;
+                        }
+                    metaData.putAll(map)
+               }
             })
-        jso["status"] = metaData.get("status")
+           jso["status"] = metaData.get("status")
 
         when( baseChannel )
         {
