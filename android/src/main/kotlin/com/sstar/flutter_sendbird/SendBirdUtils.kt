@@ -256,7 +256,8 @@ object SendBirdUtils {
         jso["url"]= baseChannel.url
         jso["data"]= baseChannel.data
         jso["is_open_channel"]= baseChannel.isOpenChannel
-        var meta = mutableMapOf<String, String>()
+        var meta: MutableMap<String, String>? = null
+        meta = HashMap()
         
         baseChannel.getAllMetaData(object: BaseChannel.MetaDataHandler {
             override
@@ -264,11 +265,11 @@ object SendBirdUtils {
                     if (e != null) {    // Error.
                         return;
                     }
-                jso["status"] = map["status"]
+                meta["status"] = map["status"]
                     
                 }
             })
-
+            jso["status"] = meta["status"]
         when( baseChannel )
         {
             is GroupChannel ->{
