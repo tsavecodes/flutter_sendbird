@@ -267,7 +267,7 @@ object SendBirdUtils {
                     metaData.putAll(map)
                }
             })
-           jso["status"] = metaData.get("status")
+          // jso["status"] = metaData.get("status")
 
         when( baseChannel )
         {
