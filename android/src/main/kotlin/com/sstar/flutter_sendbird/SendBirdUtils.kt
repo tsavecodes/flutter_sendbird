@@ -256,7 +256,7 @@ object SendBirdUtils {
         jso["url"]= baseChannel.url
         jso["data"]= baseChannel.data
         jso["is_open_channel"]= baseChannel.isOpenChannel
-      
+
         when( baseChannel )
         {
             is GroupChannel ->{
