@@ -296,8 +296,7 @@ class SendBirdUtils: NSObject {
                 }
             }
 
-            js["status"] = metadata["status"]
-            js["type"] = metadata["type"]
+            js.add(metadata)
          
         }
        }
