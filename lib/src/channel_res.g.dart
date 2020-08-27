@@ -116,7 +116,7 @@ Map<String, dynamic> _$OpenChannelToJson(OpenChannel instance) {
 ChannelMetaData _$ChannelMetaDataFromJson(Map<String, dynamic> json) {
   return ChannelMetaData()
     ..status = json['status'] as String
-    ..type = json['type'] as String
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$ChannelMetaDataToJson(OpenChannel instance) {
