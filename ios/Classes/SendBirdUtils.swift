@@ -296,7 +296,7 @@ class SendBirdUtils: NSObject {
                 }
             }
 
-            js.setDictionary(_ otherDictionary: metdata)
+            js.setDictionary(metadata)
          
         }
        }
