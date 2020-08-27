@@ -54,3 +54,13 @@ class OpenChannel extends BaseChannel {
   factory OpenChannel.fromJson(Map<String, dynamic> json) => _$OpenChannelFromJson(json);
 }
 
+@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, anyMap: true)
+class ChannelMetaData extends BaseChannel {
+  String status;
+  String type;
+
+  ChannelMetaData();
+  factory ChannelMetaData.fromJson(Map<String, dynamic> json) => _$ChannelMetaDataFromJson(json);
+}
+
+
