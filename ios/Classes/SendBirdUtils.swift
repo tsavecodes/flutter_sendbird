@@ -277,20 +277,15 @@ class SendBirdUtils: NSObject {
                 var jso = NSMutableDictionary()
                 SendBirdUtils.extractChannel(channel: grp, js: &jso)
                 jsarr.add(jso)
+                var jsm = NSMutableDictionary()
+                SendBirdUtils.extractChannelMeta(channel: grp, js: &jsm)
+                jsarr.add(jsm)
             }
             rslt( jsarr )
         }
     }
     
-    
-    
-    static func extractChannel( channel: SBDBaseChannel, js: inout NSMutableDictionary ){
-        js["cover_url"] = channel.coverUrl
-        js["name"] = channel.name
-        js["url"] = channel.channelUrl
-        js["data"] = channel.data
-        js["is_open_channel"] = channel.isOpen()
-        
+     static func extractChannelMeta( channel: SBDBaseChannel, js: inout NSMutableDictionary ){
         channel.getAllMetaData { (metadata, error) in
             guard let metadata = metadata, error == nil else {
                 if let error = error {
@@ -301,11 +296,20 @@ class SendBirdUtils: NSObject {
                 }
             }
 
-            js["status"] = metadata["status"]
+            js = metadata
          
         }
-
+       }
+    
+    
+    static func extractChannel( channel: SBDBaseChannel, js: inout NSMutableDictionary ){
+        js["cover_url"] = channel.coverUrl
+        js["name"] = channel.name
+        js["url"] = channel.channelUrl
+        js["data"] = channel.data
+        js["is_open_channel"] = channel.isOpen()
         
+       
         switch channel{
         case let opench as SBDOpenChannel:
             js["custom_type"] = opench.customType
