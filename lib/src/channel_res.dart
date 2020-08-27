@@ -61,6 +61,7 @@ class ChannelMetaData extends BaseChannel {
 
   ChannelMetaData();
   factory ChannelMetaData.fromJson(Map<String, dynamic> json) => _$ChannelMetaDataFromJson(json);
+   Map<String, dynamic> toJson() => _$ChannelMetaDataToJson(this);
 }
 
 
