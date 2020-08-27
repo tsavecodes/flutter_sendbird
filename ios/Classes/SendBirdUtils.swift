@@ -285,9 +285,8 @@ class SendBirdUtils: NSObject {
      
     func extractChannelMeta(channel: String,  rslt: @escaping FlutterResult ){
         SBDGroupChannel.getWithUrl(channel, completionHandler: { (metachannel, error) in
-                let keys : NSArray = ["status", "type"]
-
-                metachannel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+             
+                metachannel?.getAllMetaData(completionHandler: { (metaData, error) in
                     guard error == nil else {   // Error.
                         return
                     }
