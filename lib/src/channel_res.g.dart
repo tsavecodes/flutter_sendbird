@@ -113,4 +113,24 @@ Map<String, dynamic> _$OpenChannelToJson(OpenChannel instance) {
 }
 
 
+ChannelMetaData _$ChannelMetaDataFromJson(Map<String, dynamic> json) {
+  return ChannelMetaData()
+    ..status = json['status'] as String
+    ..type = json['type'] as String
+}
+
+Map<String, dynamic> _$ChannelMetaDataToJson(OpenChannel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('status', instance.status);
+  writeNotNull('type', instance.type);
+  return val;
+}
+
 
