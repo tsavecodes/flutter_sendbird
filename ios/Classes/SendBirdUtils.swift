@@ -277,28 +277,23 @@ class SendBirdUtils: NSObject {
                 var jso = NSMutableDictionary()
                 SendBirdUtils.extractChannel(channel: grp, js: &jso)
                 jsarr.add(jso)
-                var jsm = NSMutableDictionary()
-                SendBirdUtils.extractChannelMeta(channel: grp, js: &jsm)
-                jsarr.add(jsm)
+
             }
             rslt( jsarr )
         }
     }
-    
-     static func extractChannelMeta( channel: SBDBaseChannel, js: inout NSMutableDictionary ){
-        channel.getAllMetaData { (metadata, error) in
-            guard let metadata = metadata, error == nil else {
-                if let error = error {
-                    print("error retrieving metadata: \(error)")
-                    return
-                } else {
-                    fatalError("error can't be nil")
-                }
-            }
+     
+    func extractChannelMeta(channel: String,  rslt: @escaping FlutterResult ){
+        SBDGroupChannel.getWithUrl(channel, completionHandler: { (metachannel, error) in
+                let keys : NSArray = ["status", "type"]
 
-            js.setDictionary(metadata)
-         
-        }
+                metachannel?.getMetaData(withKeys: keys, completionHandler: { (metaData, error) in
+                    guard error == nil else {   // Error.
+                        return
+                    }
+                   rslt(metaData)                                                          
+                })
+            })
        }
     
     
