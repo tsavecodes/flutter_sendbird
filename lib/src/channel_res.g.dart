@@ -119,7 +119,7 @@ ChannelMetaData _$ChannelMetaDataFromJson(Map<String, dynamic> json) {
     ..type = json['type'] as String;
 }
 
-Map<String, dynamic> _$ChannelMetaDataToJson(OpenChannel instance) {
+Map<String, dynamic> _$ChannelMetaDataToJson(ChannelMetaData instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
