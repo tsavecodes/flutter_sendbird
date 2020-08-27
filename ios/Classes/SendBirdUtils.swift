@@ -285,7 +285,7 @@ class SendBirdUtils: NSObject {
         }
     }
     
-     static func extractChannelMeta( channel: SBDBaseChannel, js: inout NSMutableDictionary ){
+     static func extractChannelMeta( channel: SBDBaseChannel, js: inout [String: Any] ){
         channel.getAllMetaData { (metadata, error) in
             guard let metadata = metadata, error == nil else {
                 if let error = error {
