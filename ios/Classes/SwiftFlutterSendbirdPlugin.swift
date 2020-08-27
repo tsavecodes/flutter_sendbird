@@ -137,6 +137,9 @@ public class SwiftFlutterSendbirdPlugin: NSObject, FlutterPlugin {
             let isOpen = params[0] as! Bool
             let url = params[1] as! String
             SendBirdUtils.sharedInstance.getChannel(isOpen: isOpen, url: url, rslt: result)
+        case "extractChannelMeta":
+            let channel = call.arguments as! String
+            SendBirdUtils.sharedInstance.extractChannelMeta(channel: channel, rslt: result)
         case "markAsRead":
             let url = call.arguments as! String
             SendBirdUtils.sharedInstance.markAsRead(url: url, rslt: result )
