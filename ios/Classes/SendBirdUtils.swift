@@ -266,7 +266,7 @@ class SendBirdUtils: NSObject {
         let channelQuery = SBDGroupChannel.createMyGroupChannelListQuery()
         channelQuery?.order = .latestLastMessage
         channelQuery?.includeEmptyChannel = true
-        channelQuery?.limit = 30
+        channelQuery?.limit = 200
         channelQuery?.loadNextPage(){ groups, err in
             if( err != nil ){
                 NSLog( err.debugDescription )
