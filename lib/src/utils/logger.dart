@@ -10,6 +10,7 @@ class CustomLogFilter extends LogFilter {
 
   @override
   bool shouldLog(LogEvent event) {
+    return false;
     return event.level.index >= level.index;
   }
 }
