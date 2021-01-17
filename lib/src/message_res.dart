@@ -1,17 +1,20 @@
-import 'dart:convert';
 import 'package:flutter_sendbird/flutter_sendbird.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:intl/intl.dart';
-
-import 'utils/logger.dart';
 
 part 'message_res.g.dart';
 
 // notification: sendbird.go / updateSbMsgData()
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false, explicitToJson: true)
+@JsonSerializable(
+    fieldRename: FieldRename.snake, includeIfNull: false, explicitToJson: true)
 class Message {
-  Message({this.createdAt, this.data, this.messageId, this.type, int numberOfLikes = 0});
+  Message(
+      {this.createdAt,
+      this.data,
+      this.messageId,
+      this.type,
+      int numberOfLikes = 0});
   int createdAt;
   String data;
   int messageId;
@@ -24,13 +27,13 @@ class Message {
       return Message();
     }
 
-    logger.v('sb message data: $json');
-
     final dataJson = json['data'] as String;
 
     final int t = json['created_at'] as int;
-    json['short_create_time'] =
-        t != null ? DateFormat('H:mm').format(DateTime.fromMillisecondsSinceEpoch(t, isUtc: true).toLocal()) : '0:00';
+    json['short_create_time'] = t != null
+        ? DateFormat('H:mm').format(
+            DateTime.fromMillisecondsSinceEpoch(t, isUtc: true).toLocal())
+        : '0:00';
     switch (json['type']) {
       case 'MESG':
       case 'USER':
@@ -60,7 +63,8 @@ class UserMessage extends Message {
     this.customType,
   );
 
-  factory UserMessage.fromJson(Map<String, dynamic> json) => _$UserMessageFromJson(json);
+  factory UserMessage.fromJson(Map<String, dynamic> json) =>
+      _$UserMessageFromJson(json);
   Map<String, dynamic> toJson() => _$UserMessageToJson(this);
 
   String message;
@@ -76,7 +80,8 @@ class UserMessage extends Message {
 class AdminMessage extends Message {
   AdminMessage();
 
-  factory AdminMessage.fromJson(Map<String, dynamic> json) => _$AdminMessageFromJson(json);
+  factory AdminMessage.fromJson(Map<String, dynamic> json) =>
+      _$AdminMessageFromJson(json);
   Map<String, dynamic> toJson() => _$AdminMessageToJson(this);
   String message;
 }
@@ -84,7 +89,8 @@ class AdminMessage extends Message {
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
 class FileMessage extends Message {
   FileMessage();
-  factory FileMessage.fromJson(Map<String, dynamic> json) => _$FileMessageFromJson(json);
+  factory FileMessage.fromJson(Map<String, dynamic> json) =>
+      _$FileMessageFromJson(json);
   Map<String, dynamic> toJson() => _$FileMessageToJson(this);
 
   String name;
@@ -100,10 +106,12 @@ class FileMessage extends Message {
   bool isFromOtherUser() => senderId != FlutterSendbird().currentUserId;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false, anyMap: true)
+@JsonSerializable(
+    fieldRename: FieldRename.snake, createToJson: false, anyMap: true)
 class MessageChangeLog {
   MessageChangeLog();
-  factory MessageChangeLog.fromJson(Map<String, dynamic> json) => _$MessageChangeLogFromJson(json);
+  factory MessageChangeLog.fromJson(Map<String, dynamic> json) =>
+      _$MessageChangeLogFromJson(json);
   List<Message> updated;
   List<int> delete;
   bool hasMore;

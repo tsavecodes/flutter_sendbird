@@ -14,32 +14,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    init();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await FlutterSendbird.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+  Future<void> init() async {
+    print("Hello");
+    final token = "d0aa40eabc60f4bc66390eb7af9f116a20af9f3d";
+    final uuid = "6349077a-833a-4eda-bffd-8fc1381ae6f9";
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+    await FlutterSendbird().init("1672224A-3ACE-45E6-96C1-BBE03A72396D");
 
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    print("Initialized");
+    await FlutterSendbird().connect(uuid, token);
+    print("Connected");
+    final channels = await FlutterSendbird().fetchChannelList();
+    print(channels);
   }
 
   @override
@@ -49,9 +41,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        body: Center(),
       ),
     );
   }

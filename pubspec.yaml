@@ -1,6 +1,6 @@
 name: flutter_sendbird
-description: A new flutter plugin project.
-version: 0.0.3
+description: Integration with Sendbird iOS and Android SDKs
+version: 0.0.4
 author:
 homepage: https://github.com/sensestar/flutter_sendbird
 repository: https://github.com/sensestar/flutter_sendbird
@@ -12,7 +12,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  logger: ^0.8.3
   json_annotation: ^3.0.1
   http: ^0.12.0+4
   intl: ^0.16.1

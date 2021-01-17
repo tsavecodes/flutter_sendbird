@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'channel_res.dart';
 import 'message_res.dart';
 import 'user_res.dart';
-import 'utils/logger.dart';
+// import 'utils/logger.dart';
 
 Map<String, dynamic> _castJsonMap(Map map) {
   return Map<String, dynamic>.from(map);
@@ -28,8 +28,10 @@ class FlutterSendbird {
 
   String get currentUserId => _currentUserId;
 
-  sync.StreamController<Map<String, dynamic>> eventChannel = sync.StreamController<Map<String, dynamic>>.broadcast();
-  sync.StreamController<Message> eventChannelMessage = sync.StreamController<Message>.broadcast();
+  sync.StreamController<Map<String, dynamic>> eventChannel =
+      sync.StreamController<Map<String, dynamic>>.broadcast();
+  sync.StreamController<Message> eventChannelMessage =
+      sync.StreamController<Message>.broadcast();
 
   FlutterSendbird._internal();
 
@@ -38,7 +40,9 @@ class FlutterSendbird {
   }
 
   Future<bool> connect(String userId, String token) async {
+    print("HI");
     final bool ret = await platform.invokeMethod('connect', [userId, token]);
+    print("ret");
     connected = ret;
     if (connected) {
       _currentUserId = userId;
@@ -63,12 +67,11 @@ class FlutterSendbird {
       return GroupChannel.fromJson(_castJsonMap(json));
     }
   }
-  
+
   Future<ChannelMetaData> extractChannelMeta(String url) async {
     final json = await platform.invokeMethod('extractChannelMeta', [url]);
     if (json == null) return null;
-      return ChannelMetaData.fromJson(_castJsonMap(json));
-   
+    return ChannelMetaData.fromJson(_castJsonMap(json));
   }
 
   Future<void> updateCurrentUser(String nickname, String profileImg) async {
@@ -97,7 +100,8 @@ class FlutterSendbird {
   }
 
   Future registerPushTokenToSendBird(String token) async {
-    final ret = await platform.invokeMethod('registerPushTokenToSendBird', token);
+    final ret =
+        await platform.invokeMethod('registerPushTokenToSendBird', token);
     return ret;
   }
 
@@ -132,12 +136,14 @@ class FlutterSendbird {
     return null;
   }
 
-  Future<List<Message>> getLastMessages(bool isOpen, String qid, String groupId, int count) async {
+  Future<List<Message>> getLastMessages(
+      bool isOpen, String qid, String groupId, int count) async {
     if (connected == false) {
-      logger.e('sendbird getLastMessages before connected');
+      // logger.e('sendbird getLastMessages before connected');
       return [];
     }
-    final msgs = await platform.invokeMethod('getLastMessages', [isOpen, qid, groupId, count]);
+    final msgs = await platform
+        .invokeMethod('getLastMessages', [isOpen, qid, groupId, count]);
     if (msgs != null) {
       final ret = <Message>[];
       for (var json in msgs) {
@@ -158,7 +164,7 @@ class FlutterSendbird {
   }) async {
     // forward => new messsages, false older message
     if (connected == false) {
-      logger.e('sendbird getLastMessages before connected');
+      // logger.e('sendbird getLastMessages before connected');
       return [];
     }
     final msgs = await platform.invokeMethod('getMessagesByMsgId', [
@@ -185,10 +191,11 @@ class FlutterSendbird {
     int timestamp,
   ) async {
     if (connected == false) {
-      logger.e('sendbird getLastMessages before connected');
+      // logger.e('sendbird getLastMessages before connected');
       return null;
     }
-    final msgs = await platform.invokeMethod('getMessageChangeLogsByTimestamp', [
+    final msgs =
+        await platform.invokeMethod('getMessageChangeLogsByTimestamp', [
       isOpen,
       url,
       timestamp,
@@ -206,7 +213,7 @@ class FlutterSendbird {
     String queryToken,
   ) async {
     if (connected == false) {
-      logger.e('sendbird getLastMessages before connected');
+      // logger.e('sendbird getLastMessages before connected');
       return null;
     }
     final msgs = await platform.invokeMethod('getMessageChangeLogsByToken', [
@@ -222,28 +229,49 @@ class FlutterSendbird {
   }
 
   Future<UserMessage> sendUserMessage(
-      bool isOpen, String url, String customType, String message, String userData, List<String> mentionUsers) async {
-    final json = await platform
-        .invokeMethod('sendUserMessage', [isOpen, url, customType, message, userData, mentionUsers.join(',')]);
+      bool isOpen,
+      String url,
+      String customType,
+      String message,
+      String userData,
+      List<String> mentionUsers) async {
+    final json = await platform.invokeMethod('sendUserMessage',
+        [isOpen, url, customType, message, userData, mentionUsers.join(',')]);
     if (json != null) {
       return Message.fromJson(_castJsonMap(json)) as UserMessage;
     }
     return null;
   }
 
-  Future<UserMessage> updateUserMessage(
-      bool isOpen, String url, String customType, int msgId, String message, String userData) async {
-    final json = await platform.invokeMethod('updateUserMessage', [isOpen, url, customType, msgId, message, userData]);
+  Future<UserMessage> updateUserMessage(bool isOpen, String url,
+      String customType, int msgId, String message, String userData) async {
+    final json = await platform.invokeMethod('updateUserMessage',
+        [isOpen, url, customType, msgId, message, userData]);
     if (json != null) {
       return Message.fromJson(_castJsonMap(json)) as UserMessage;
     }
     return null;
   }
 
-  Future sendFileMessage(bool isOpen, String url, String customType, String message, String userData, String filePath,
-      String fileType, List<String> mentionUsers) async {
-    final _ = await platform.invokeMethod(
-        'sendFileMessage', [isOpen, url, customType, message, userData, filePath, fileType, mentionUsers.join(',')]);
+  Future sendFileMessage(
+      bool isOpen,
+      String url,
+      String customType,
+      String message,
+      String userData,
+      String filePath,
+      String fileType,
+      List<String> mentionUsers) async {
+    final _ = await platform.invokeMethod('sendFileMessage', [
+      isOpen,
+      url,
+      customType,
+      message,
+      userData,
+      filePath,
+      fileType,
+      mentionUsers.join(',')
+    ]);
   }
 
   EventChannel listenSendFileProgress(
@@ -265,8 +293,10 @@ class FlutterSendbird {
     await platform.invokeMethod('markAsRead', url);
   }
 
-  Future<GroupChannel> createChannelWithUserIds(List<String> userIds, bool isDistinct) async {
-    final json = await platform.invokeMethod('createChannelWithUserIds', [userIds, isDistinct]);
+  Future<GroupChannel> createChannelWithUserIds(
+      List<String> userIds, bool isDistinct) async {
+    final json = await platform
+        .invokeMethod('createChannelWithUserIds', [userIds, isDistinct]);
     if (json != null) {
       final channel = GroupChannel.fromJson(_castJsonMap(json));
       return channel;

@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_sendbird (0.0.1):
+    - Flutter
+    - SendBirdSDK
+  - SendBirdSDK (3.0.208)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_sendbird (from `.symlinks/plugins/flutter_sendbird/ios`)
+
+SPEC REPOS:
+  trunk:
+    - SendBirdSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_sendbird:
+    :path: ".symlinks/plugins/flutter_sendbird/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_sendbird: 09c167b8f0f3dd191621efbfb23e2f877de26763
+  SendBirdSDK: d94f34c0712c6b12cf63abbea9c62b6f0fec14e8
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.0
