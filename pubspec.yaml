@@ -1,6 +1,6 @@
 name: flutter_sendbird
 description: Integration with Sendbird iOS and Android SDKs
-version: 0.0.6
+version: 0.0.7
 author:
 homepage: https://github.com/sensestar/flutter_sendbird
 repository: https://github.com/sensestar/flutter_sendbird
@@ -12,13 +12,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  json_annotation: ^4.0.0
+  json_annotation: ^3.0.0
   http: ^0.12.0+2
   intl: ^0.17.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  json_serializable: ^4.0.2
+  json_serializable: ^3.5.1
   build_runner: ^1.11.5
 
 flutter:
